@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const userController = require("../controller/userController");
-/* GET users listing. */
-/*router.get('/!*', function(req, res, next) {
-    console.log(req)
-    res.send({name: 'yujuncheng', age: 23});
-});*/
+const User = require('../models/user.js');
 
-router.get('/insert', function(req, res){
-    const responce = userController.insertUser('yujuncheng' , 23)
-    res.render(JSON.stringify(responce))
+router.get('/', function(req, res){
+    console.log(req)
+    var user = new User({name: 'yujuncheng', password: 24});
+
+    user.save(function(data) {
+        console.log(data)
+        res.send(data.data)
+    })
+    // res.render('error', { title: '404', result: result });
 });
 
 
